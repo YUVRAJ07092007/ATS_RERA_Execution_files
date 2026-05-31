@@ -1,5 +1,10 @@
 # Rejoinder / Further Representation — Inadequate Response to Objections on Plan Revision and Non-Compliance with HARERA Order
 
+**Document date:** 31 May 2026  
+**File:** `6_Rejoinder_to_ATS_Reply_31-05-2026.md`
+
+---
+
 **From:**  
 Mr. Vijyant Agarwal  
 Allottee / Complainant  
@@ -10,7 +15,7 @@ Address: House No. 07, Type V, Netaji Subhas University of Technology, Sector-03
 Email: [●]  
 Mobile: [●]
 
-**Date:** [●]
+**Date:** 31.05.2026
 
 **To,**  
 The Authorised Signatory / Customer Relations Head  
@@ -30,8 +35,8 @@ Also at: Project Site Office, ATS Grandstand, Sector 99A, Gurugram
 
 ## References
 
-1. My Representation / Objection dated [●] (earlier letter on the same subject).  
-2. Your email reply dated [●] in response to my email dated 17.05.2026, with enclosures from folder `Reply by ATS`.  
+1. My Representation / Objection dated **17.05.2026** (earlier letter on the same subject).  
+2. Your email reply in response to my email dated 17.05.2026, with enclosures from folder `Reply by ATS`.  
 3. **HARERA, Gurugram Order dated 18.04.2024** in Complaint No. 4463 of 2021, *Vijyant Agarwal & Anr. v. ATS Realworth Pvt. Ltd.* (`9.ORDER APRIL 2024 RERA ATS .pdf`).  
 4. **Certified copy of HARERA order** including rectification proceedings dated **08.08.2024** under Section 39 of the Act (`10.certified copy of order.pdf`).  
 5. DTCP in-principle approval Memo No. LC-2806/JE(AK)/2025/46794 dated 10.12.2025 (change of developer).  
@@ -76,7 +81,7 @@ These obligations remain **fully binding** on the existing and proposed develope
 | **10** | Confirmation that silence shall not be treated as consent | Request for my consent instead | **Rejected.** This is a direct refusal to give the confirmation sought. Silence/non-response cannot be treated as consent, especially when complete documents were not individually supplied. |
 | **11** | Fresh 30-day objection period from actual individual supply | Policy compliance asserted; office visit offered | **Rejected.** A fresh objection period must run from the date of complete individual supply. Partial enclosures with evasive answers do not start any valid consent clock. |
 | **12** | Confirmation that HARERA order obligations remain binding | Evasive answer that query is unrelated; vague promise to comply if order is final | **Rejected.** The HARERA order dated 18.04.2024 is already a binding authority order. Certified copy confirms enforceability. Change of developer and plan revision do not extinguish pre-EMI, possession, disclosure, and escrow obligations. |
-| **13** | Updated construction status, OC/CC status, possession date, escrow details | Referred back to Point 12 | **Rejected.** This is continuing non-compliance with the HARERA order itself, which directed disclosure within 30 days of 18.04.2024. Your reply dated [●] still fails to provide escrow statement, construction status, or OC position. |
+| **13** | Updated construction status, OC/CC status, possession date, escrow details | Referred back to Point 12 | **Rejected.** This is continuing non-compliance with the HARERA order itself, which directed disclosure within 30 days of 18.04.2024. Your reply still fails to provide escrow statement, construction status, or OC position. |
 
 ---
 
@@ -127,10 +132,14 @@ Unit No. 3051, Tower No. 03, Type-D
 ATS Grandstand Phase-I, Sector 99A, Gurugram
 
 **Enclosures:**  
-1. Copy of my earlier Representation / Objection dated [●]  
-2. Copy / printout of your email reply dated [●] with index of enclosures received  
+1. Copy of my earlier Representation / Objection dated **17.05.2026**  
+2. Copy / printout of your email reply with index of enclosures received  
 3. Copy of **HARERA Order dated 18.04.2024**, Complaint No. 4463 of 2021 (`9.ORDER APRIL 2024 RERA ATS .pdf`)  
 4. Copy of **Certified Copy of Order** including Section 39 proceedings dated 08.08.2024 (`10.certified copy of order.pdf`)  
 5. Extract / copy of your comparative chart (Tower 03 and overall planning changes)  
 6. Copy of DTCP permission dated 04.05.2026 (as received from you)  
 7. Copy of individual notice dated 07.05.2026 issued to another allottee (for contrast)
+
+---
+
+*Prepared on 31 May 2026. Fill in [●] for email and mobile before dispatch.*
