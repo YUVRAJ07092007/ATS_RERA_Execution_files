@@ -1,3 +1,5 @@
 *.gdoc
 *.gsheet
 desktop.ini
+__pycache__/
+*.pyc

@@ -17,13 +17,13 @@ Department of Town and Country Planning (DTCP), Haryana
 9. The Authorised Signatory, **ATS** — ATS Tower, Plot No. 16, Sector-135, Noida; and Project Site Office, ATS Grandstand, Sector 99A, Gurugram — Email: **getamber@atsgreen.com**
 
 **From,**  
-Prof. **Vijyant Agarwal** (an employee of Govt. of NCT of Delhi)  
+Prof. **Vijyant Agarwal**  
 ATS Grandstand Phase-I, Sector 99A, Gurugram  
 HARERA (Haryana Real Estate Regulatory Authority) order dated **18.04.2024** applies to Unit No. **3051**
 
 **Subject:** Mandatory safeguards before final Change of Developer (COD) approval — **intra-group restructuring** (ATS Realworth / Hasta / Homekraft), not arm's-length takeover
 
-श्रीमान,
+माननीय महोदय/महोदया,
 
 With due respect, the undersigned allottee places this consolidated list before your good office for kind consideration in connection with the proposed change of developer.
 
@@ -82,8 +82,6 @@ Mob.No. 9899308574
 
 ---
 
-<div style="page-break-before: always;"></div>
-
 **Key terms — abbreviations and full forms**
 
 **Table 1 — Key terms — abbreviations and full forms**
@@ -140,8 +138,6 @@ Mob.No. 9899308574
 ## Technical framework — three separate tracks
 
 This matter involves **three tracks** that ATS has mixed together. They must be kept distinct on the DTCP file (**please see Table 2**):
-
-<div style="page-break-before: always;"></div>
 
 **Table 2 — Three separate tracks**
 
