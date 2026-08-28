@@ -1,6 +1,6 @@
-"""Regenerate affidavit DOCX from markdown — full faithful conversion."""
+"""Regenerate Post-Hearing Representation DOCX from markdown — faithful conversion."""
 import re
-from datetime import datetime
+import sys
 from pathlib import Path
 
 from docx import Document
@@ -8,36 +8,16 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt
 
-AFFIDAVIT_DIR = Path(__file__).resolve().parent.parent / "MOM_dated_18062026_DTCP"
-MD_PATH = AFFIDAVIT_DIR / "20062026_DRAFT_Affidavit_cum_Undertaking_Unit_3051.md"
-DOCX_PATH = AFFIDAVIT_DIR / "20062026_DRAFT_Affidavit_cum_Undertaking_Unit_3051.docx"
+MOM_DIR = Path(__file__).resolve().parent.parent / "MOM_dated_18062026_DTCP"
+MD_PATH = MOM_DIR / "19062026_Post_Hearing_Representation_Unit_3051.md"
+DOCX_PATH = MOM_DIR / "19062026_Post_Hearing_Representation_Unit_3051.docx"
 
 FONT = "Times New Roman"
-BODY_SIZE = 11
-TIMESTAMP_RE = re.compile(r"^\*\*Last updated:\*\*\s*.+\n?", re.MULTILINE)
+BODY_SIZE = 12
 
 CENTER_HEADERS = (
-    "AFFIDAVIT-CUM-UNDERTAKING",
-    "Specific to Unit No. 3051",
+    "Post-Hearing Representation",
 )
-
-
-def now_stamp() -> str:
-    return datetime.now().strftime("%d.%m.%Y %H:%M:%S")
-
-
-def stamp_line(stamp: str | None = None) -> str:
-    return f"**Last updated:** {stamp or now_stamp()}\n"
-
-
-def update_md_timestamp(text: str, stamp: str | None = None) -> tuple[str, str]:
-    stamp = stamp or now_stamp()
-    line = stamp_line(stamp)
-    if TIMESTAMP_RE.search(text):
-        text = TIMESTAMP_RE.sub(line, text, count=1)
-    else:
-        text = text.replace("\n", f"\n{line}", 1)
-    return text, stamp
 
 
 def sf(run, *, bold=False, italic=False, size=BODY_SIZE):
@@ -49,12 +29,15 @@ def sf(run, *, bold=False, italic=False, size=BODY_SIZE):
 
 
 def add_runs_from_md(paragraph, text: str, *, bold=False, italic=False, size=BODY_SIZE):
-    parts = re.split(r"(\*\*.+?\*\*|\*.+?\*)", text)
+    parts = re.split(r"(\*\*.+?\*\*|`[^`]+`|\*.+?\*)", text)
     for part in parts:
         if not part:
             continue
         if part.startswith("**") and part.endswith("**"):
             add_runs_from_md(paragraph, part[2:-2], bold=True, italic=italic, size=size)
+        elif part.startswith("`") and part.endswith("`"):
+            run = paragraph.add_run(part[1:-1])
+            sf(run, bold=bold, italic=italic, size=size)
         elif part.startswith("*") and part.endswith("*") and not part.startswith("**"):
             add_runs_from_md(paragraph, part[1:-1], bold=bold, italic=True, size=size)
         else:
@@ -80,6 +63,25 @@ def add_para(
     return p
 
 
+def add_para_with_line_breaks(
+    doc,
+    block_lines: list[str],
+    *,
+    align=WD_ALIGN_PARAGRAPH.LEFT,
+    after=8,
+    size=BODY_SIZE,
+):
+    p = doc.add_paragraph()
+    p.alignment = align
+    p.paragraph_format.space_after = Pt(after)
+    p.paragraph_format.line_spacing = 1.15
+    for idx, line_text in enumerate(block_lines):
+        if idx > 0:
+            p.add_run().add_break()
+        add_runs_from_md(p, line_text.strip(), size=size)
+    return p
+
+
 def is_center_header(text: str) -> bool:
     plain = re.sub(r"\*+", "", text).strip()
     return any(plain.startswith(prefix) for prefix in CENTER_HEADERS)
@@ -90,10 +92,12 @@ def heading_level(line: str) -> int | None:
         return 3
     if line.startswith("## "):
         return 2
+    if line.startswith("# "):
+        return 1
     return None
 
 
-def build_docx_from_md(text: str) -> None:
+def build_docx_from_md(text: str, docx_path: Path) -> None:
     doc = Document()
     for section in doc.sections:
         section.top_margin = Cm(2.5)
@@ -117,61 +121,60 @@ def build_docx_from_md(text: str) -> None:
             continue
 
         level = heading_level(line)
-        if level == 2:
-            title = line[3:].strip()
+        if level in (1, 2, 3):
+            title = line.lstrip("#").strip()
             align = (
                 WD_ALIGN_PARAGRAPH.CENTER
                 if is_center_header(title)
                 else WD_ALIGN_PARAGRAPH.JUSTIFY
             )
-            add_para(doc, title, bold=True, align=align, after=8, size=12 if is_center_header(title) else BODY_SIZE)
+            add_para(
+                doc,
+                title,
+                bold=True,
+                align=align,
+                after=8,
+                size=12 if is_center_header(title) else BODY_SIZE,
+            )
             i += 1
             continue
 
-        if level == 3:
-            title = line[4:].strip()
-            align = WD_ALIGN_PARAGRAPH.CENTER if is_center_header(title) else WD_ALIGN_PARAGRAPH.JUSTIFY
-            add_para(doc, title, bold=True, align=align, after=8)
-            i += 1
-            continue
-
-        if line.startswith("**Last updated:**"):
-            add_para(doc, line, align=WD_ALIGN_PARAGRAPH.LEFT, after=6, size=10)
-            i += 1
-            continue
-
-        if line.endswith("  "):
+        if raw.endswith("  "):
             block_lines = []
             while i < len(lines):
-                current = lines[i].rstrip()
+                current_raw = lines[i]
+                current = current_raw.rstrip()
                 if not current or current.strip() == "---":
                     break
                 if heading_level(current):
                     break
-                block_lines.append(current.rstrip())
+                block_lines.append(current)
                 i += 1
-                if not lines[i - 1].endswith("  "):
+                if not current_raw.endswith("  "):
                     break
-            add_para(doc, "\n".join(block_lines), align=WD_ALIGN_PARAGRAPH.LEFT, after=8)
+            add_para_with_line_breaks(doc, block_lines)
             continue
 
         add_para(doc, line, after=6)
         i += 1
 
-    doc.save(DOCX_PATH)
+    doc.save(docx_path)
 
 
 def main() -> None:
     from add_page_numbers_mom_folder import add_docx_page_numbers
 
-    text = MD_PATH.read_text(encoding="utf-8")
-    text, stamp = update_md_timestamp(text)
-    MD_PATH.write_text(text, encoding="utf-8")
-    build_docx_from_md(text)
-    add_docx_page_numbers(DOCX_PATH)
-    print(f"Timestamp: {stamp}")
-    print(f"Updated MD:  {MD_PATH}")
-    print(f"Refreshed:   {DOCX_PATH}")
+    md_path = MD_PATH
+    docx_path = DOCX_PATH
+    if len(sys.argv) > 1:
+        md_path = Path(sys.argv[1])
+        docx_path = md_path.with_suffix(".docx")
+
+    text = md_path.read_text(encoding="utf-8")
+    build_docx_from_md(text, docx_path)
+    add_docx_page_numbers(docx_path)
+    print(f"Source MD:  {md_path}")
+    print(f"Refreshed:  {docx_path}")
 
 
 if __name__ == "__main__":
